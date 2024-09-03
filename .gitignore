@@ -1,0 +1,7 @@
+Results/
+
+logs/
+
+__pycache__/
+
+api_keys.robot
