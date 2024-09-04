@@ -6,7 +6,7 @@ Resource    ../../../Resources/import_settings.robot
 
 the user send a GET Request on Get Account API
     Create Session    ACCOUNTS    ${BaseURL}  headers=&{HEADERS}  verify=true
-    ${response}=    GET On Session  ACCOUNTS  /account  json=&{BodyParams}  expected_status=any
+    ${response}=    GET On Session  ACCOUNTS  /account  expected_status=any
     Set Test Variable    ${response_json}    ${response.json()}
     Log    ${response_json}
     Log To Console    ${response_json}

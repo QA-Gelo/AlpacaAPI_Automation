@@ -4,6 +4,7 @@ Library     Collections
 Library     JSONLibrary
 Library     OperatingSystem
 Library     String
+# Library     BuiltIn
 Library     ../Utilities/CustomLibrary.py
 Resource    environment_config/environment_variables.robot
 Resource    environment_config/api_keys.robot
@@ -16,31 +17,25 @@ the Authorization header has been filled out with valid credentials
     ...  APCA-API-KEY-ID=${API_KEY}
     ...  APCA-API-SECRET-KEY=${SECRET_KEY}
     Set Test Variable    ${HEADERS}
-    
-the required Body Parameters has been filled out with valid values
-    &{BODY_PARAMS}=  Create Dictionary
-    ...  symbol=${symbol_value}
-    ...  qty=${qty_value}
-    ...  side=${side_value}
-    ...  type=${type_value}
-    ...  time_in_force=${time_in_force_value}
-    # ...  notional=
-    # ...  limit_price=
-    # ...  stop_price=
-    # ...  trail_price=
-    # ...  trail_percent=
-    # ...  extended_hours=
-    # ...  client_order_id=
-    # ...  order_class=
-    # ...  take_profit=
-    # ...  position_intent=
-    Set Test Variable    ${BODY_PARAMS}
 
 the Status Code and Message should be ${status_code} and ${status_message}
     Status Should Be  ${status_code}  msg=${status_message}
 
-the Response Matches the expected Schema
-    [Arguments]    ${response_json}    ${expected_schema}    
+the Response Matches The Expected Schema
+    [Arguments]    ${response_json}    ${expected_schema}
+    ${is_list}=    Evaluate    isinstance(${response_json}, list)
+    Run Keyword If    ${is_list}    Validate List of Dictionaries    ${response_json}    ${expected_schema}
+    ...    ELSE    Validate Dictionary Keys    ${response_json}    ${expected_schema}
+
+Validate List of Dictionaries
+    [Arguments]    ${list}    ${expected_schema}
+    Should Be True    ${list}    msg=Response is not a list
+    FOR    ${item}    IN    @{list}
+        Validate Dictionary Keys    ${item}    ${expected_schema[0]}
+    END
+
+Validate Dictionary Keys
+    [Arguments]    ${dictionary}    ${expected_schema}
     FOR    ${key}    IN    @{expected_schema.keys()}
-        Dictionary Should Contain Key    ${response_json}    ${key}
+        Dictionary Should Contain Key    ${dictionary}    ${key}
     END

@@ -3,6 +3,26 @@ Resource    ../../../Resources/import_settings.robot
 
 
 *** Keywords ***
+
+the required Create an Order Body Parameters has been filled out with valid values
+    &{BODY_PARAMS}=  Create Dictionary
+    ...  symbol=${symbol_value}
+    ...  qty=${qty_value}
+    ...  side=${side_value}
+    ...  type=${type_value}
+    ...  time_in_force=${time_in_force_value}
+    # ...  notional=
+    # ...  limit_price=
+    # ...  stop_price=
+    # ...  trail_price=
+    # ...  trail_percent=
+    # ...  extended_hours=
+    # ...  client_order_id=
+    # ...  order_class=
+    # ...  take_profit=
+    # ...  position_intent=
+    Set Test Variable    ${BODY_PARAMS}
+
 the user send a POST Request for Create an Order API
     Create Session    ORDERS    ${BaseURL}  headers=&{HEADERS}  verify=true
     ${response}=    POST On Session  ORDERS  /orders  json=&{BODY_PARAMS}  expected_status=any
