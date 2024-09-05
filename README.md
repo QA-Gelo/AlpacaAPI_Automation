@@ -22,14 +22,21 @@ Alpaca provides a commission-free trading API that allows developers to create a
 This repository showcases the following skills:
 
 API Automation: Automated testing for API requests such as GET, POST, PUT, and DELETE operations.
+
 Test Framework: Integration with test automation frameworks.
+
 JSON Schema Validation: Validation of API responses against JSON schemas to ensure correctness.
+
 Robot Framework: Implementation of test suites in Robot Framework for better readability and extensibility.
+
 Refactoring and Code Organization: Clean and well-structured automation code.
 
 **Tech Stack**
 
 Programming Language: Python
+
 Automation Framework: Robot Framework
+
 API Testing Tool: Postman for initial testing
+
 Version Control: Git
