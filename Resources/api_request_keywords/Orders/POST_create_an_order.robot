@@ -4,6 +4,11 @@ Resource    ../../../Resources/import_settings.robot
 
 *** Keywords ***
 
+the user successfully created an order
+    the Authorization header has been filled out with valid credentials
+    the required Create an Order Body Parameters has been filled out with valid values
+    the user send a POST Request for Create an Order API
+
 the required Create an Order Body Parameters has been filled out with valid values
     &{BODY_PARAMS}=  Create Dictionary
     ...  symbol=${symbol_value}
@@ -29,6 +34,8 @@ the user send a POST Request for Create an Order API
     Set Test Variable    ${response_json}    ${response.json()}
     Log    ${response_json}
     Log To Console    ${response_json}
+    Set Suite Variable    ${order_ID}    ${response_json}[id]
+    Log To Console    Order ID: ${order_ID}
     Expected Create an Order API Response Schema
 
 Expected Create an Order API Response Schema

@@ -1,6 +1,5 @@
 *** Settings ***
 Resource    ../Resources/import_settings.robot
-Resource    ../Resources/api_request_keywords/Assets/GET_get_asset_by_symbol.robot
 
 
 *** Test Cases ***

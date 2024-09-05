@@ -1,6 +1,5 @@
 *** Settings ***
 Resource    ../Resources/import_settings.robot
-Resource    ../Resources/api_request_keywords/Accounts/GET_get_account.robot
 
 
 *** Test Cases ***

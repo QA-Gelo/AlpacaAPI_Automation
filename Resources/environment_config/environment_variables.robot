@@ -16,6 +16,6 @@ ${get-all-orders_symbol_value}              AP
 ${get-all-orders_side_value}                buy
 # Get Order By ID Body Parameter Variables
 ${order_ID}
-
+${existing_order_ID}                        e8971640-930d-4b87-aae2-351ca4f27d72
 
 

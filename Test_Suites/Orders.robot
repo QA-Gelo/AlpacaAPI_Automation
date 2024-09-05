@@ -1,7 +1,5 @@
 *** Settings ***
 Resource    ../Resources/import_settings.robot
-Resource    ../Resources/api_request_keywords/Orders/POST_create_an_order.robot
-Resource    ../Resources/api_request_keywords/Orders/GET_get_all_orders.robot
 
 *** Test Cases ***
 Alpaca: Create an Order
@@ -17,5 +15,19 @@ Alpaca: Get All Orders
     Given the Authorization header has been filled out with valid credentials
     And the required Get All Orders Body Parameters has been filled out with valid values
     When the user send a GET Request for Get All Orders API
+    Then the Status Code and Message should be 200 and OK
+    And the Response Matches the expected Schema    ${response_json}    ${expected_schema}
+
+Alpaca: Get Order by Newly Created ID
+    [Tags]    Get_Order_by_New_ID
+    Given the user successfully created an order
+    When the user send a GET Request for Get Order by Newly Created ID API
+    Then the Status Code and Message should be 200 and OK
+    And the Response Matches the expected Schema    ${response_json}    ${expected_schema}
+
+Alpaca: Get Order by Existing ID
+    [Tags]    Get_Order_by_Existing_ID
+    Given the Authorization header has been filled out with valid credentials
+    When the user send a GET Request for Get Order by Existing ID API
     Then the Status Code and Message should be 200 and OK
     And the Response Matches the expected Schema    ${response_json}    ${expected_schema}
