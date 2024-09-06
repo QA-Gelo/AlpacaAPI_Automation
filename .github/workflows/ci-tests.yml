@@ -33,7 +33,7 @@ jobs:
       - name: Run Robot Framework tests
         run: |
           mkdir -p results
-          robot --variable API_KEY:${{ secrets.API_KEY }} --variable API_SECRET:${{ secrets.SECRET_KEY }} --outputdir results tests/
+          robot --variable API_KEY:${{ secrets.API_KEY }} --variable API_SECRET:${{ secrets.SECRET_KEY }} --outputdir results Test_Suites/
           
         env:
           BASE_URL: ${{ secrets.BASE_URL }}  # Example for setting environment variable directly
