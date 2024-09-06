@@ -18,7 +18,7 @@ Alpaca: Get All Orders
     Then the Status Code and Message should be 200 and OK
     And the Response Matches the expected Schema    ${response_json}    ${expected_schema}
 
-Alpaca: Get Order by Newly Created ID
+Alpaca: Get Newly Created Order by ID
     [Tags]    Get_Order_by_New_ID
     Given the user successfully created an order
     When the user send a GET Request for Get Order by Newly Created ID API
