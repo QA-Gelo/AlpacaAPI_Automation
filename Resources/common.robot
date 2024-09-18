@@ -4,7 +4,7 @@ Library     Collections
 Library     JSONLibrary
 Library     OperatingSystem
 Library     String
-Library     ../Utilities/CustomLibrary.py
+Library     ../Resources/Utilities/CustomLibrary.py
 Resource    environment_config/environment_variables.robot
 Resource    environment_config/api_keys.robot
 
@@ -18,7 +18,8 @@ the Authorization header has been filled out with valid credentials
     Set Test Variable    ${HEADERS}
 
 the Status Code and Message should be ${status_code} and ${status_message}
-    Status Should Be  ${status_code}  msg=${status_message}
+    ${status}=  Run Keyword and Return Status  Status Should Be  ${status_code}  msg=${status_message}
+    Run Keyword If   ${status}==False   Fail    Response Status Code is not ${status_code} ${status_message}
 
 the Response Matches The Expected Schema
     [Arguments]    ${response_json}    ${expected_schema}
